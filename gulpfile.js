@@ -2,7 +2,6 @@
  Required plugins
  -------------------------------------------------------------------*/
 var source     = require('vinyl-source-stream'),
-    path       = require('path'),
     gulp       = require('gulp'),
     gutil      = require('gulp-util'),
     browserify = require('browserify'),
@@ -15,7 +14,7 @@ var source     = require('vinyl-source-stream'),
  -------------------------------------------------------------------*/
 var scriptsDir = './src',
     distDir    = './dist/js',
-    mui        = ''
+    mui        = '';
 
 /*------DEV TASKS------*/
 
@@ -36,7 +35,8 @@ function handleErrors() {
 function buildScript(file, watch) {
   var props = {entries: [scriptsDir + '/' + file], debug: true};
   var bundler = watch ? watchify(props) : browserify(props);
-  bundler.transform(reactify);
+  bundler.transform(['reactify', {'es6': true}]);
+
   function rebundle() {
     var stream = bundler.bundle();
     return stream.on('error', handleErrors)
@@ -44,10 +44,12 @@ function buildScript(file, watch) {
       .pipe(gulp.dest(distDir + '/'))
       .pipe(notify({ message: 'scripts task complete' }));
   }
+
   bundler.on('update', function() {
     rebundle()
     .pipe(notify({ message: 'Rebundle...' }));
   });
+
   return rebundle();
 }
 
@@ -71,7 +73,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', function() {
-  return buildScript('App.js', false);
+  return buildScript('index.js', false);
 });
 
 gulp.task('default', ['build', 'styles'], function() {
