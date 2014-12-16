@@ -58,7 +58,7 @@ function buildScript(file, watch) {
  -------------------------------------------------------------------*/
 gulp.task('styles', function() {
   return gulp.src('src/style/app.less')
-    .pipe(less({paths: ['node_modules/material-ui/src/less']}))
+    .pipe(less({paths: []}))
     .pipe(gulp.dest('dist/css'))
     .pipe(notify({ message: 'Styles task complete' }));
 });
