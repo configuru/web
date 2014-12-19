@@ -9,15 +9,19 @@ body {
   background: #f6f6f6;
 }
 nav {
-  background: #fff;
-  box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+  background: #3B3A3A;
+  border-bottom: 1px solid #000;
 
   h1 {
     display: inline-block;
     font-size: 28px;
-    color: #606571;
     margin: 10px 0;
-
+    a {
+      color: #fff;
+      &:hover {
+        color: #eee;
+      }
+    }
   }
   .ui.right.horizontal.list {
     float: right;
@@ -26,4 +30,22 @@ nav {
 }
 .container {
   padding: 0 15px;
+}
+.page-content {
+  padding: 25px 15px;
+}
+.page-title {
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 25px;
+  padding: 0 0 15px;
+
+}
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+  stroke: #D9499A!important;
+}
+
+.jsoneditor {
+  width:100%;
+  height: 500px;
 }
